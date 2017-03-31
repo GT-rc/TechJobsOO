@@ -71,7 +71,7 @@ namespace TechJobs.Controllers
         // Lists Jobs with a given field matching a given value
         public IActionResult Jobs(JobFieldType column, string value)
         {
-            JobFieldssViewModel jobsViewModel = new JobFieldssViewModel();
+            SearchJobsViewModel jobsViewModel = new SearchJobsViewModel();
             jobsViewModel.Jobs = jobData.FindByColumnAndValue(column, value);
             jobsViewModel.Title = "Jobs with " + column + ": " + value;
 
