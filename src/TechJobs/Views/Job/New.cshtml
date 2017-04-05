@@ -15,18 +15,18 @@
 
     <div class="form-goup">
         <label asp-for="Locations"></label>
-        <select class="form-control" asp-for="Locations" asp-items="Model.Locations"></select>
+        <select class="form-control" asp-for="LocationID" asp-items="Model.Locations"></select>
     </div>
 
     <div class="form-goup">
         <label asp-for="CoreCompetencies"></label>
-        <select class="form-control" asp-for="CoreCompetencies" asp-items="Model.CoreCompetencies"></select>
+        <select class="form-control" asp-for="CoreCompetenciesID" asp-items="Model.CoreCompetencies"></select>
     </div>
 
     <div class="form-goup">
         <label asp-for="PositionTypes"></label>
-        <select class="form-control" asp-for="PositionTypes" asp-items="Model.PositionTypes"></select>
+        <select class="form-control" asp-for="PositionTypeID" asp-items="Model.PositionTypes"></select>
     </div>
-
+    <br />
     <input type="submit" value="Add Job" />
 </form>

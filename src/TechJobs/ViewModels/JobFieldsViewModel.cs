@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TechJobs.Data;
 using TechJobs.Models;
 
 namespace TechJobs.ViewModels
@@ -32,7 +33,8 @@ namespace TechJobs.ViewModels
                 Columns.Add(enumVal);
             }
 
-
         }
+
+        
     }
 }

@@ -3,6 +3,7 @@ using TechJobs.Data;
 using TechJobs.Models;
 using TechJobs.ViewModels;
 
+
 namespace TechJobs.Controllers
 {
     public class JobController : Controller
@@ -19,10 +20,8 @@ namespace TechJobs.Controllers
         // The detail display for a given Job at URLs like /Job?id=17
         public IActionResult Index(int id)
         {
-            JobFieldsViewModel jobFieldsViewModel = new JobFieldsViewModel();
             Job job = JobData.Find(id);
-            ViewBag.job = job;
-            return View(jobFieldsViewModel);
+            return View(job);
         }
 
         public IActionResult New()
@@ -30,15 +29,36 @@ namespace TechJobs.Controllers
             NewJobViewModel newJobViewModel = new NewJobViewModel();
             return View(newJobViewModel);
         }
-
+        
         [HttpPost]
         public IActionResult New(NewJobViewModel newJobViewModel)
         {
-            // TODO #6 - Validate the ViewModel and if valid, create a 
-            // new Job and add it to the JobData data store. Then
-            // redirect to the Job detail (Index) action/view for the new Job.
+            
+            if (ModelState.IsValid)
+            {
+                Employer emp = JobData.Employers.Find(newJobViewModel.EmployerID);
+                Location loc = JobData.Locations.Find(newJobViewModel.LocationID);
+                CoreCompetency skill = JobData.CoreCompetencies.Find(newJobViewModel.CoreCompetenciesID);
+                PositionType post = JobData.PositionTypes.Find(newJobViewModel.PositionTypeID);
 
-            return View(newJobViewModel);
+                Job newJob = new Job
+                {
+                    Name = newJobViewModel.Name,
+                    Employer = emp,
+                    Location = loc,
+                    CoreCompetency = skill,
+                    PositionType = post
+                };
+
+                JobData.Jobs.Add(newJob);
+
+                string id = newJob.ID.ToString();
+                
+                return Redirect("/Job?id=" + id);
+                
+            } 
+
+            return View(newJobViewModel); 
         }
     }
 }
